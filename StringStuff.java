@@ -39,8 +39,8 @@ public class StringStuff {
         maxRun = maxRun(fileLine.toCharArray());
 
         // writing output to output file
-        writer.write(stringBlowUp + "\n");
-        writer.write(Integer.toString(maxRun) + "\n");
+        writer.write("The string blow up is " + stringBlowUp + "\n");
+        writer.write("The max run is " + Integer.toString(maxRun) + "\n");
       }
 
       // close writer and scanner
