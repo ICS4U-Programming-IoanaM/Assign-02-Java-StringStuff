@@ -5,18 +5,18 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * This program finds the max run and Strung blow up of 
- * the input to and from a file.
+ * This program finds the max run and Strung blow up of the input to and from a file.
  *
  * @author Ioana Marinescu
  * @version 1.0
  * @since 2024-04-14
  */
+
+@SuppressWarnings("HideUtilityClassConstructor")
 public class StringStuff {
 
   /**
-   * Reads from a file, calls the necessary 
-   * functions, then writes to another file.
+   * Reads from a file, calls the necessary functions, then writes to another file.
    *
    * @param args The command line arguments (not used in this program).
    * @throws FileNotFoundException If the input file is not found.
@@ -63,13 +63,12 @@ public class StringStuff {
   }
 
   /**
-   * Calculates the maximum consecutive run of identical characters in the given
-   * character array.
+   * Calculates the maximum consecutive run of identical characters in the given character array.
    *
    * @param input The input character array.
    * @return The maximum consecutive run of identical characters.
    */
-  public static int maxRun(char[] input) {
+  public static int maxRun(final char[] input) {
     // variables
     int currentRun = 0;
     int highestRun = 0;
@@ -104,9 +103,9 @@ public class StringStuff {
    * @param input The input character array.
    * @return The processed string after applying the string blow up operation.
    */
-  public static String stringBlowUp(char[] input) {
+  public static String stringBlowUp(final char[] input) {
     // variables
-    StringBuilder output = new StringBuilder();
+    String output = "";
 
     // loop through array
     for (int index = 0; index < input.length; index++) {
@@ -114,18 +113,18 @@ public class StringStuff {
       if (Character.isDigit(input[index])) {
         // digit is the last character
         if (index + 1 == input.length) {
-          return output.toString();
+          return output;
         }
         // digit is not the last character
         else {
           // adds next character to output relative to the digit's value times
           int times = Character.getNumericValue(input[index]);
-          output.append(String.valueOf(input[index + 1]).repeat(Math.max(0, times)));
+          output += String.valueOf(input[index + 1]).repeat(Math.max(0, times));
         }
       }
       // character is not a digit
       else {
-        output.append(input[index]);
+        output += input[index];
       }
     }
     // return the output
