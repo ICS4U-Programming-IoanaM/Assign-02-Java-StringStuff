@@ -26,6 +26,7 @@ public class StringStuff {
       // variable declaration
       String fileLine;
       String stringBlowUp;
+      int maxRun;
 
       // getting input from input file
       while (scanner.hasNextLine()) {
@@ -34,9 +35,12 @@ public class StringStuff {
         stringBlowUp = stringBlowUp(fileLine.toCharArray());
 
         // calling max tun function + read line
-        // fileLine = scanner.nextLine();
+        fileLine = scanner.nextLine();
+        maxRun = maxRun(fileLine.toCharArray());
+
         // writing output to output file
-        writer.write(stringBlowUp);
+        writer.write(stringBlowUp + "\n");
+        writer.write(Integer.toString(maxRun) + "\n");
       }
 
       // close writer and scanner
@@ -46,6 +50,34 @@ public class StringStuff {
     } catch (IOException e) {
       System.out.println("File could not be found. Please fix the file path.");
     }
+  }
+
+  public static int maxRun(char[] input) {
+    // variables
+    int currentRun = 0;
+    int highestRun = 0;
+
+    // loops through input to find the max run
+    for (int index = 0; index < input.length; index++) {
+      // if last character
+      if (index == input.length - 1) {
+        return highestRun;
+        // if the current character is the same as the next
+      } else if (input[index] == input[index + 1]) {
+        currentRun++;
+
+        // if the current run is higher than the highest run
+        if (currentRun > highestRun) {
+          highestRun = currentRun;
+        }
+
+        // if the current character is not the same as the next
+      } else {
+        currentRun = 0;
+      }
+    }
+    // if this is returned there is something wrong with my program
+    return -1;
   }
   
   public static String stringBlowUp(char[] input) {
