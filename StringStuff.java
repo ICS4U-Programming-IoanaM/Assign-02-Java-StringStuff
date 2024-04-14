@@ -5,19 +5,29 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * This program does some fun stuff with strings.
+ * This program finds the max run and Strung blow up of 
+ * the input to and from a file.
  *
  * @author Ioana Marinescu
  * @version 1.0
  * @since 2024-04-14
  */
-
 public class StringStuff {
+
+  /**
+   * Reads from a file, calls the necessary 
+   * functions, then writes to another file.
+   *
+   * @param args The command line arguments (not used in this program).
+   * @throws FileNotFoundException If the input file is not found.
+   */
   public static void main(String[] args) throws FileNotFoundException {
     try {
       // File paths
-      File input = new File("Assign/Assign-02/Assign-02-Java-StringStuff/input.txt");
-      File output = new File("Assign/Assign-02/Assign-02-Java-StringStuff/output.txt");
+      String in = "Assign/Assign-02/Assign-02-Java-StringStuff/input.txt";
+      String out = "Assign/Assign-02/Assign-02-Java-StringStuff/output.txt";
+      File input = new File(in);
+      File output = new File(out);
 
       // scanner and writer
       Scanner scanner = new Scanner(input);
@@ -34,13 +44,13 @@ public class StringStuff {
         fileLine = scanner.nextLine();
         stringBlowUp = stringBlowUp(fileLine.toCharArray());
 
-        // calling max tun function + read line
+        // calling max run function + read line
         fileLine = scanner.nextLine();
         maxRun = maxRun(fileLine.toCharArray());
 
         // writing output to output file
         writer.write("The string blow up is " + stringBlowUp + "\n");
-        writer.write("The max run is " + Integer.toString(maxRun) + "\n");
+        writer.write("The max run is " + maxRun + "\n");
       }
 
       // close writer and scanner
@@ -52,6 +62,13 @@ public class StringStuff {
     }
   }
 
+  /**
+   * Calculates the maximum consecutive run of identical characters in the given
+   * character array.
+   *
+   * @param input The input character array.
+   * @return The maximum consecutive run of identical characters.
+   */
   public static int maxRun(char[] input) {
     // variables
     int currentRun = 0;
@@ -62,50 +79,56 @@ public class StringStuff {
       // if last character
       if (index == input.length - 1) {
         return highestRun;
-        // if the current character is the same as the next
-      } else if (input[index] == input[index + 1]) {
+      }
+      // if the current character is the same as the next
+      else if (input[index] == input[index + 1]) {
         currentRun++;
 
         // if the current run is higher than the highest run
         if (currentRun > highestRun) {
           highestRun = currentRun;
         }
-
-        // if the current character is not the same as the next
-      } else {
+      }
+      // if the current character is not the same as the next
+      else {
         currentRun = 0;
       }
     }
     // if this is returned there is something wrong with my program
     return -1;
   }
-  
+
+  /**
+   * Performs string blow up operation on the given character array.
+   *
+   * @param input The input character array.
+   * @return The processed string after applying the string blow up operation.
+   */
   public static String stringBlowUp(char[] input) {
     // variables
-    String output = "";
+    StringBuilder output = new StringBuilder();
 
-    // loop though array
+    // loop through array
     for (int index = 0; index < input.length; index++) {
       // character is a digit
-      if ((input[index] >= '0' && input[index] <= '9')) {
+      if (Character.isDigit(input[index])) {
         // digit is the last character
         if (index + 1 == input.length) {
-          return output;
-
-          // digit is not the last character
-        } else {
-          // adds next character to output relative to the digit's value times
-          for (int counter = 0; counter < input[index] - '0'; counter++) {
-            output += input[index + 1];
-          }
+          return output.toString();
         }
-        // character is not a digit
-      } else {
-        output += input[index];
+        // digit is not the last character
+        else {
+          // adds next character to output relative to the digit's value times
+          int times = Character.getNumericValue(input[index]);
+          output.append(String.valueOf(input[index + 1]).repeat(Math.max(0, times)));
+        }
+      }
+      // character is not a digit
+      else {
+        output.append(input[index]);
       }
     }
-
     // return the output
-    return output;
+    return output.toString();
   }
 }
