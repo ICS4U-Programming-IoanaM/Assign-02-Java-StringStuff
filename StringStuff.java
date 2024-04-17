@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -24,8 +25,8 @@ public class StringStuff {
   public static void main(String[] args) throws FileNotFoundException {
     try {
       // File paths
-      String in = "Assign/Assign-02/Assign-02-Java-StringStuff/input.txt";
-      String out = "Assign/Assign-02/Assign-02-Java-StringStuff/output.txt";
+      String in = "Assign-02-Java-StringStuff\\input.txt";
+      String out = "Assign-02-Java-StringStuff\\output.txt";
       File input = new File(in);
       File output = new File(out);
 
@@ -53,12 +54,20 @@ public class StringStuff {
         writer.write("The max run is " + maxRun + "\n");
       }
 
+      // output was successful message
+      System.out.println("The process was successful.");
+
       // close writer and scanner
       scanner.close();
       writer.close();
 
+      // file could not be found
     } catch (IOException e) {
       System.out.println("File could not be found. Please fix the file path.");
+
+      // missing
+    } catch (NoSuchElementException e) {
+      System.out.println("There is a missing line in the file. Please make sure your input file is in order.");
     }
   }
 
