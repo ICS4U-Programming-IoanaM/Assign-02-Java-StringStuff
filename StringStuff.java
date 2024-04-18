@@ -12,7 +12,6 @@ import java.util.Scanner;
  * @version 1.0
  * @since 2024-04-14
  */
-
 @SuppressWarnings("HideUtilityClassConstructor")
 public class StringStuff {
 
@@ -25,8 +24,8 @@ public class StringStuff {
   public static void main(String[] args) throws FileNotFoundException {
     try {
       // File paths
-      String in = "Assign-02-Java-StringStuff\\input.txt";
-      String out = "Assign-02-Java-StringStuff\\output.txt";
+      String in = "Assign/Assign-02/Assign-02-Java-StringStuff/input.txt";
+      String out = "Assign/Assign-02/Assign-02-Java-StringStuff/output.txt";
       File input = new File(in);
       File output = new File(out);
 
@@ -67,7 +66,8 @@ public class StringStuff {
 
       // missing
     } catch (NoSuchElementException e) {
-      System.out.println("There is a missing line in the file. Please make sure your input file is in order.");
+      System.out.println(
+          "There is a missing line in the file. Please make sure your input file is in order.");
     }
   }
 

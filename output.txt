@@ -1,6 +1,2 @@
 The string blow up is aabcccdddd111110e
 The max run is 7
-The string blow up is aabcccdddd111110e
-The max run is 7
-The string blow up is aabcccdddd111110e
-The max run is 7
